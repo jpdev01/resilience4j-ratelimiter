@@ -25,7 +25,10 @@ class AwsConfig {
     private final Region region
 
     AwsConfig(@Value('${application.aws-region}') String region) {
-        this.region = Optional.ofNullable(region).map(Region::of).orElse(Region.SA_EAST_1)
+        this.region = Optional
+            .ofNullable(region)
+                .map(Region::of)
+                .orElse(Region.SA_EAST_1)
     }
 
     @Bean
