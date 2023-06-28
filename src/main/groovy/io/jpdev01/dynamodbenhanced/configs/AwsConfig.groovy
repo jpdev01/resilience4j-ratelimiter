@@ -34,12 +34,17 @@ class AwsConfig {
 
     @Bean
     DynamoDbClient dynamoDbClient() {
-        DynamoDbClient.builder().region(region).credentialsProvider(AWS_CREDENTIALS).build()
+        return DynamoDbClient.builder()
+            .region(region)
+            .credentialsProvider(AWS_CREDENTIALS)
+            .build()
     }
 
     @Bean
     DynamoDbEnhancedClient dynamoDbEnhancedClient(DynamoDbClient client) {
-        DynamoDbEnhancedClient.builder().dynamoDbClient(client).build()
+        return DynamoDbEnhancedClient.builder()
+            .dynamoDbClient(client)
+            .build()
     }
 
 }
