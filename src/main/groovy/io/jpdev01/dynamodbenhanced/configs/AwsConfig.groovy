@@ -19,11 +19,7 @@ class AwsConfig {
     private static final AwsCredentialsProvider AWS_CREDENTIALS
 
     static {
-        try {
-            AWS_CREDENTIALS = DefaultCredentialsProvider.create().tap { it.resolveCredentials() }
-        } catch (SdkClientException ignored) {
-            AWS_CREDENTIALS = ProfileCredentialsProvider.create()
-        }
+        AWS_CREDENTIALS = getCredentials()
     }
 
     private final Region region
@@ -45,6 +41,18 @@ class AwsConfig {
         return DynamoDbEnhancedClient.builder()
             .dynamoDbClient(client)
             .build()
+    }
+
+    private static AwsCredentialsProvider getCredentials() {
+        try {
+            return DefaultCredentialsProvider
+                .create()
+                .tap {
+                    it.resolveCredentials()
+                }
+        } catch (SdkClientException exception) {
+            return ProfileCredentialsProvider.create()
+        }
     }
 
 }
