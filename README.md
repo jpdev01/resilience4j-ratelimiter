@@ -47,3 +47,6 @@ A implementção está seguindo o padrão MVC, estão temos Controller, Service,
 * Execute o seguinte comando na raiz do projeto: `docker-compose -up`;
 * Após iniciar, os recursos do LocalStack estarão disponíveis na porta: `4566` e região: `sa-east-1`
 * As configurações podem ser alteradas no arquivo [docker-compose.yaml](docker-compose.yaml), além de (des)ativar os serviços desejados.
+
+### Detalhes da tabela User:
+![img.png](img.png)
