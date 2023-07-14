@@ -1,4 +1,12 @@
-version: '3'
+version: '3.3'
+
+networks:
+  aw-network:
+    driver: bridge
+
+volumes:
+  prometheus_data:
+
 services:
   localstack:
     image: localstack/localstack
@@ -8,3 +16,15 @@ services:
       - DEBUG=1
       - DEFAULT_REGION=sa-east-1
       - SERVICES=dynamodb
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - aw-network
+    ports:
+      - 9090:9090
