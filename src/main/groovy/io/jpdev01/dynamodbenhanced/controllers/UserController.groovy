@@ -1,6 +1,7 @@
 package io.jpdev01.dynamodbenhanced.controllers
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter
 import io.jpdev01.dynamodbenhanced.UserCreationDto
 import io.jpdev01.dynamodbenhanced.UserUpdateDto
 import io.jpdev01.dynamodbenhanced.exceptions.UserAbsentException
@@ -44,6 +45,7 @@ class UserController {
     }
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @RateLimiter(name = "CreateUser")
     ResponseEntity create(@RequestBody User user) {
         try {
             userService.create(user).with { convertUserResponse(it, UserCreationDto) }

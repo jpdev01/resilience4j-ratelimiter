@@ -19,3 +19,14 @@ management:
       enabled: true
     prometheus:
       enabled: true
+
+resilience4j:
+  ratelimiter:
+    configs:
+      default:
+        timeout-duration: 10ms
+    instances:
+      CreateUser:
+        base-config: default
+        limit-for-period: 1
+        limit-refresh-period: 20s

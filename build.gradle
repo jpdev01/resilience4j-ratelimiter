@@ -25,6 +25,7 @@ ext {
 dependencies {
     implementation 'org.codehaus.groovy:groovy'
     implementation group: 'io.micrometer', name: 'micrometer-registry-prometheus', version: '1.8.2'
+    implementation group: 'io.github.resilience4j', name: 'resilience4j-spring-boot2', version: '1.7.1'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
